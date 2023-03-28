@@ -40,166 +40,147 @@ weight
 
 As per the original GAN paper, the loss function for GAN is as below
 
-$$
-\min _G \max _D V(D, G)=\mathbb{E}_{\boldsymbol{x} \sim p_{\text {data }}(\boldsymbol{x})}[\log D(\boldsymbol{x})]+\mathbb{E}_{\boldsymbol{z} \sim p_{\boldsymbol{z}}(\boldsymbol{z})}[\log (1-D(G(\boldsymbol{z})))]
-$$
-
+<p align="center" >
+    <img width=600 src="Equations/1.png">
+</p>
 ## Derivation of the loss:
 
 Before we go into the derivation, let’s describe some parameters and variables: 
 
-$$
-\begin{equation}
-\begin{aligned}
-& \mathrm{z} \rightarrow \text { Noise vector } \quad \mathrm{G}(\mathrm{z}) \rightarrow \text { Generator's output } \rightarrow x_{\text {fake }} \\
-& \mathrm{x} \rightarrow \text { training sample } \rightarrow x_{\text {real }} \\
-& \mathrm{D}(\mathrm{x}) \rightarrow \text { Discriminator's output for } x_{\text {real }} \rightarrow \mathrm{P}\left(\mathrm{y} \mid x_{\text {real }}\right) \rightarrow\{0,1\} \\
-& \mathrm{D}(\mathrm{G}(\mathrm{z})) \rightarrow \text { Discriminator's output for } x_{\text {fake }} \rightarrow \mathrm{P}\left(\mathrm{y} \mid x_{\text {fake }}\right) \rightarrow\{0,1\}
-\end{aligned}
-\end{equation}
-$$
+<p align="center" >
+    <img width=600 src="Equations/2.png">
+</p>
+
 
 The loss function described in the original paper by Ian Goodfellow et al. can be derived from the formula of binary cross-entropy loss.
 
-$$
-\begin{equation}L(\hat{y}, y)=-(y \cdot \log \hat{y}+(1-y) \cdot \log (1-\hat{y}))\end{equation}
-$$
 
+<p align="center" >
+    <img width=600 src="Equations/3.png">
+</p>
 ### Discriminator Loss:
 
 The discriminator can have two possible inputs, real or fake.
 
 While training the discriminator, the label of data coming from the $x_{real}$ is $y = 1$  and $\hat y = D(x)$. Then, equation 2 becomes: 
 
-$$
-\begin{equation}L(D(x), 1)=-\log (D(x))\end{equation}
-$$
-
+<p align="center" >
+    <img width=600 src="Equations/4.png">
+</p>
 While training data is coming form generator, $y = 0$ and $\hat y = D(G(z))$. Then, equation 2 becomes: 
 
-$$
-\begin{equation}L(D(G(z)), 0)=-\log (1-D(G(z)))\end{equation}
-$$
+<p align="center" >
+    <img width=600 src="Equations/5.png">
+</p>
 
 Combining both the above losses for the discriminator, one for a real input and the other for a fake input: 
 
-$$
-D_{total} = D_{real} + D_{fake}
-$$
-
-$$
-\begin{equation}L(\text { Discriminator })=-[\log (D(x))+\log (1-D(G(z)))] \end{equation}
-$$
+<p align="center" >
+    <img width=600 src="Equations/6.png">
+</p>
 
 Here, The goal of the discriminator is to minimize this loss so equation(5) becomes: 
 
-$$
-\begin{equation}L(\text { Discriminator })=\min [-[\log (D(x))+\log (1-D(G(z)))]]\end{equation}
-$$
+<p align="center" >
+    <img width=600 src="Equations/7.png">
+</p>
 
 **Min** will become **max** when the negative sign is removed, hence the final discriminator loss for a single data-point can be expressed as: 
 
-$$
-\begin{equation}L(\text { Discriminator })=\max [\log (D(x))+\log (1-D(G(z)))]\end{equation}
-$$
 
+<p align="center" >
+    <img width=600 src="Equations/8.png">
+</p>
 ### Generator loss:
 
 Here, the generator is competing against discriminator. So, it will try to minimize the equation (7) and loss function is given as,
 
-$$
-\begin{equation}L^{(G)}=\min [\log (D(x))+\log (1-D(G(z)))]\end{equation}
-$$
-
+<p align="center" >
+    <img width=600 src="Equations/9.png">
+</p>
 ### **Combined loss function :**
 
 Lets combine equation (7) and equation (8) : 
 
- 
 
-$$
-\begin{equation}L=\min _G \max _D[\log (D(x))+\log (1-D(G(z)))]\end{equation}
-$$
+<p align="center" >
+    <img width=600 src="Equations/10.png">
+</p>
 
 As the aforementioned loss function only applies to a single data point, we must interpret the expectation of the aforementioned equation as: 
 
-$$
-\begin{equation} \min _G \max _D V(D, G)=\mathbb{E}_{\boldsymbol{x} \sim p_{\text {data }}(\boldsymbol{x})}[\log D(\boldsymbol{x})]+\mathbb{E}_{\boldsymbol{z} \sim p_{\boldsymbol{z}}(\boldsymbol{z})}[\log (1-D(G(\boldsymbol{z})))] \end{equation}
-$$
-
+<p align="center" >
+    <img width=600 src="Equations/11.png">
+</p>
 ### **What is the optimal value for D?**
 
 The training criterion of discriminator D, given any generator G is to maximize equation (10). Hence, the optimal discriminator for a given G is denoted as : 
 
-$$
-\begin{equation}D_{G}^* = \argmax _D V(D,G)\end{equation}
-$$
 
+<p align="center" >
+    <img width=600 src="Equations/12.png">
+</p>
 We know that: 
 
-$$
-\begin{equation} E_{px}[x] = \int_x x p_x(x)dx  \end{equation}
-$$
-
-$\begin{aligned} D_G^* & =\underset{D}{\operatorname{argmax}}\left\{E_{x \sim p_{d a}(x)}\left[\log (D(x)]+E_{z \sim p_z(z)}[\log (1-D(G(x)))]\right\}\right. \\ & =\underset{D}{\operatorname{argmax}}\{V(G, D)\}\end{aligned}$
-
+<p align="center" >
+    <img width=600 src="Equations/13.png">
+</p>
 Applying equation (12) to equation (13): 
 
-$$
-\begin{equation}V(G, D)=\int_x p_{d a t a}(x) \log (D(x)) d x+\int_z p_z(z) \log (1-D(G(z))) d z\end{equation}
-$$
+<p align="center" >
+    <img width=600 src="Equations/14.png">
+</p>
 
 **But, in the paper it is written as:** 
 
-$$
-\begin{equation}V(G, D)= \int_x p_{data}(x) \log (D(x)) d x+\int_x p_g(x) \log (1-D(x)) d x \end{equation}
-$$
+
+<p align="center" >
+    <img width=600 src="Equations/15.png">
+</p>
 
 Now lets understand the following and we will jump back to equation(15): 
 
-$$
-\int_z p_z(z) \log (1-D(G(z))) d z = \int_x p_g(x) \log (1-D(x)) d x  ?
-$$
+
+<p align="center" >
+    <img width=600 src="Equations/16.png">
+</p>
 
 If the probability density function of a random variable X is given as $p_x(x)$, it is possible to calculate the probability density function of some variable $y = G(x)$ and is defined as change of variable:  
 
-$$
-p_{Y}(y)=p_x\left(G^{-1}(y)\right) \mid \frac{d}{d y}\left(G^{-1}(y)\right) \mid
-$$
 
+<p align="center" >
+    <img width=600 src="Equations/17.png">
+</p>
 So, in our case: 
 
-$$
-p_{g}(x)=p_z\left(G^{-1}(x)\right) \mid \frac{d}{d x}\left(G^{-1}(x)\right) \mid
-$$
 
+<p align="center" >
+    <img width=600 src="Equations/18.png">
+</p>
 Here, 
 
-$$
-z\sim p_z(z) \rightarrow G_{generator} \rightarrow x = G(z)
-$$
+<p align="center" >
+    <img width=600 src="Equations/19.png">
+</p>
 
 Assume $G$  is invertible, so $z = G^{-1}(x)$. Lets start from left side of the equation 15: 
 
-$$
-\begin{equation}\begin{aligned}& =\int_x\left\{p_z\left(G^{-1}(x)\right) \frac{d G^{-1}(x)}{d x}\right\} \log (1-D(x)) d x \\& =\int_x p_g(x) \log (1-D(x)) d x-3 \text { (Proved) }\end{aligned}\end{equation}
-$$
-
-$$
-\begin{equation}\begin{aligned}& =\int_x\left\{p_z\left(G^{-1}(x)\right) \frac{d G^{-1}(x)}{d x}\right\} \log (1-D(x)) d x \\& =\int_x p_g(x) \log (1-D(x)) d x \text { (Proved) }\end{aligned}\end{equation}
-$$
+<p align="center" >
+    <img width=600 src="Equations/20.png">
+</p>
 
 Now, from equation 15 : 
 
-$$
-\begin{equation}V(G, D)=\int_x\left[p_{d a+a}(x) \log (D(x))+\phi_g(x) \log (1-D(x))\right] d x\end{equation}
-$$
+<p align="center" >
+    <img width=600 src="Equations/21.png">
+</p>
 
 The goal of the discriminator is to maximize this value function(18). Through a partial derivative of  $V(G,D)$ respect to $D(x)$  we see that the optimal discriminator, denoted as $D^*(x)$ occurs when 
 
-$$
-\begin{equation}\begin{aligned}& \Rightarrow \frac{d}{D(x)}\left[p_{\text {data }}(x) \log (D(x))+p_g(x) \log (1-D(x))\right]=0 \\& \left.\Rightarrow \frac{p_{\text {data }}(x)}{D(x)}-\frac{p_g(x)}{1-D(x)}=0\right\} \\& \left.\Rightarrow D_G^*(x)=\frac{p_{\text {data }}(x)}{p_{\text {data }}(x)+p_g(x)}\right\}\text {}\end{aligned}\end{equation}
-$$
+
+<p align="center" >
+    <img width=600 src="Equations/22.png">
+</p>
 
 Here, $D_G^*(x)=\frac{p_{\text {data }}(x)}{p_{\text {data }}(x)+p_g(x)}$ makes intuitive sense. if some sample $x$ is highly genuine, we would expect $p_{data}(x)$ to be close to 1 and $p_g(x)$ to be converge to 0, in which case the optimal discriminator would  assign 1 to that sample. On the other hand, for a generated sample $x=G(z)$, we expect the optimal discriminator to assign a label of zero, since $p_{data}(G(z))$ should be close to zero.
 
