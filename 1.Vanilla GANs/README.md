@@ -208,17 +208,23 @@ Here, $D_G^*(x)=\frac{p_{\text {data }}(x)}{p_{\text {data }}(x)+p_g(x)}$ makes 
     
     Because $\frac {df_1}{dx} = y$ and $\frac {df_2}{dy} = - x$, we update $x$  with $x - \eta . y$ and $y + \eta . x$ with simultaneously in one iteration, where is the learning rate. Once $x$ and $y$ have different signs, every following gradient update causes huge oscillation and the instability gets worse in time, as shown in Fig
     
-    ![https://lilianweng.github.io/posts/2017-08-20-gan/nash_equilibrium.png](https://lilianweng.github.io/posts/2017-08-20-gan/nash_equilibrium.png)
-    
+   
+    <p align="center" >
+    <img width=800 src="https://lilianweng.github.io/posts/2017-08-20-gan/nash_equilibrium.png">
+    </p>
     ### ****Why are GANs hard to train?****
     
     These issues arise because the ideal weights for adversarial networks correspond to saddle points rather than loss function minimization. Often employed alternating stochastic gradient algorithms do not consistently converge to saddle points, and when they do, they are frequently quite sensitive to learning rates.
     
     ![Untitled](Generative%20Adversarial%20Networks%208b93ba11164f4f908dbf3f0c341efe76/Untitled%202.png)
+
+
     
     ## Creating your own GAN:
-    
-    ![http://wiki.pathmind.com/images/wiki/GANdancers.png](http://wiki.pathmind.com/images/wiki/GANdancers.png)
+
+        <p align="center" >
+    <img width=800 src="http://wiki.pathmind.com/images/wiki/GANdancers.png">
+    </p>
     
     ```jsx
     import cv2 
