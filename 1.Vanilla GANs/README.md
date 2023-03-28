@@ -141,12 +141,7 @@ $$
 \begin{equation} E_{px}[x] = \int_x x p_x(x)dx  \end{equation}
 $$
 
-$$
-\begin{aligned}
-D_G^* & =\underset{D}{\operatorname{argmax}}\left\{E_{x \sim p_{d a}(x)}\left[\log (D(x)]+E_{z \sim p_z(z)}[\log (1-D(G(x)))]\right\}\right. \\
-& =\underset{D}{\operatorname{argmax}}\{V(G, D)\}
-\end{aligned}
-$$
+$\begin{aligned} D_G^* & =\underset{D}{\operatorname{argmax}}\left\{E_{x \sim p_{d a}(x)}\left[\log (D(x)]+E_{z \sim p_z(z)}[\log (1-D(G(x)))]\right\}\right. \\ & =\underset{D}{\operatorname{argmax}}\{V(G, D)\}\end{aligned}$
 
 Applying equation (12) to equation (13): 
 
