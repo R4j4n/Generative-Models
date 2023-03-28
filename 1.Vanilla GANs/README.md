@@ -210,7 +210,7 @@ Here, $D_G^*(x)=\frac{p_{\text {data }}(x)}{p_{\text {data }}(x)+p_g(x)}$ makes 
     
    
     <p align="center" >
-    <img width=800 src="https://lilianweng.github.io/posts/2017-08-20-gan/nash_equilibrium.png">
+    <img width=800 src="Generative Adversarial Networks 8b93ba11164f4f908dbf3f0c341efe76/nash_equilibrium.png">
     </p>
     ### ****Why are GANs hard to train?****
     
@@ -222,10 +222,6 @@ Here, $D_G^*(x)=\frac{p_{\text {data }}(x)}{p_{\text {data }}(x)+p_g(x)}$ makes 
     
     ## Creating your own GAN:
 
-        <p align="center" >
-    <img width=800 src="http://wiki.pathmind.com/images/wiki/GANdancers.png">
-    </p>
-    
     ```jsx
     import cv2 
     import torch
